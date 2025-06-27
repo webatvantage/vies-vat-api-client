@@ -7,7 +7,7 @@ namespace DragonBe\Test\Vies\Validator;
 class ValidatorHUTest extends AbstractValidatorTest
 {
     /**
-     * @covers \DragonBe\Vies\Validator\ValidatorHU
+     * @covers \DragonBe\Vies\Validators\ValidatorHU
      * @dataProvider vatNumberProvider
      */
     public function testValidator(string $vatNumber, bool $state)

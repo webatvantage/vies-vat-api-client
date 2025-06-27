@@ -8,9 +8,10 @@
  * recognise it as such) clearly on their website.
  *
  */
+
+use DragonBe\Vies\Exceptions\ViesException;
+use DragonBe\Vies\Exceptions\ViesServiceException;
 use DragonBe\Vies\Vies;
-use DragonBe\Vies\ViesException;
-use DragonBe\Vies\ViesServiceException;
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 

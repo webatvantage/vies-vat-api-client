@@ -4,10 +4,10 @@ declare (strict_types=1);
 namespace DragonBe\Test\Vies;
 
 use DragonBe\Vies\CheckVatResponse;
+use DragonBe\Vies\Exceptions\ViesException;
+use DragonBe\Vies\Exceptions\ViesServiceException;
 use DragonBe\Vies\HeartBeat;
 use DragonBe\Vies\Vies;
-use DragonBe\Vies\ViesException;
-use DragonBe\Vies\ViesServiceException;
 use PHPUnit\Framework\TestCase;
 use SoapClient;
 use SoapFault;
@@ -28,11 +28,11 @@ class ViesTest extends TestCase
     }
     /**
      * @dataProvider vatNumberProvider
-     * @covers ::filterVat
+     * @covers ::normalizeVat
      */
     public function testVatNumberFilter($vatNumber, $filteredNumber)
     {
-        $this->assertEquals($filteredNumber, Vies::filterVat($vatNumber));
+        $this->assertEquals($filteredNumber, Vies::normalizeVat($vatNumber));
     }
 
     protected function createdStubbedViesClient($response)
@@ -146,7 +146,7 @@ class ViesTest extends TestCase
      *
      * @dataProvider badCountryCodeProvider
      * @covers ::validateVat
-     * @expectedException \DragonBe\Vies\ViesException
+     * @expectedException \DragonBe\Vies\Exceptions\ViesException
      * @param $code
      */
     public function testExceptionIsRaisedForNonEuropeanUnionCountryCodesRequester($code)

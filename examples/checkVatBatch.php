@@ -1,8 +1,8 @@
 <?php
 
+use DragonBe\Vies\Exceptions\ViesException;
+use DragonBe\Vies\Exceptions\ViesServiceException;
 use DragonBe\Vies\Vies;
-use DragonBe\Vies\ViesException;
-use DragonBe\Vies\ViesServiceException;
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 
@@ -28,7 +28,7 @@ if (false === $vies->getHeartBeat()->isAlive()) {
 
         $countryCode = substr($vatin, 0, 2);
         $vatNumber   = substr($vatin, 2);
-        $vatNumber   = $vies->filterVat($vatNumber);
+        $vatNumber   = $vies->normalizeVat($vatNumber);
 
         try {
             $result = $vies->validateVat($countryCode, $vatNumber);     // Validation routine worked as expected.

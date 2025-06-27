@@ -56,8 +56,6 @@ Here's a usage example you can immediately execute on the command line (or in cr
 <?php
 
 use DragonBe\Vies\Vies;
-use DragonBe\Vies\ViesException;
-use DragonBe\Vies\ViesServiceException;
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 
@@ -213,9 +211,7 @@ echo 'Trader city match: ' . $vatResult->getCityMatch() . PHP_EOL;
 ```php
 <?php
 
-use DragonBe\Vies\Vies;
-use DragonBe\Vies\ViesException;
-use DragonBe\Vies\ViesServiceException;
+use DragonBe\Vies\Exceptions\ViesException;use DragonBe\Vies\Exceptions\ViesServiceException;use DragonBe\Vies\Vies;
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 

@@ -1,7 +1,7 @@
 <?php
 
+use DragonBe\Vies\Exceptions\ViesException;
 use DragonBe\Vies\Vies;
-use DragonBe\Vies\ViesException;
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 

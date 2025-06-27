@@ -2,9 +2,9 @@
 
 namespace DragonBe;
 
+use DragonBe\Vies\Exceptions\ViesException;
+use DragonBe\Vies\Exceptions\ViesServiceException;
 use DragonBe\Vies\Vies;
-use DragonBe\Vies\ViesException;
-use DragonBe\Vies\ViesServiceException;
 
 require_once __DIR__ . '/../../vendor/autoload.php';
 
@@ -39,7 +39,7 @@ do {
     $vatin = $row['vat_id'];
     $vatCountry = substr($vatin, 0, 2);
     $vatNumber = substr($vatin, 2);
-    $vatNumber = $vies->filterVat($vatNumber);
+    $vatNumber = $vies->normalizeVat($vatNumber);
     $reason = '';
 
     try {

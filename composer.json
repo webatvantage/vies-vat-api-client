@@ -25,9 +25,10 @@
         }
     },
     "require": {
-        "php": ">=7.3",
-        "ext-soap": "*",
-        "ext-ctype": "*"
+        "php": ">=7.4",
+        "ext-ctype": "*",
+        "ext-json": "*",
+        "guzzlehttp/guzzle": "^7.9"
     },
     "require-dev": {
         "ext-pcntl": "*",

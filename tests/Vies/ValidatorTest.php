@@ -3,8 +3,8 @@ declare (strict_types=1);
 
 namespace DragonBe\Test\Vies;
 
+use DragonBe\Vies\Exceptions\ViesServiceException;
 use DragonBe\Vies\Vies;
-use DragonBe\Vies\ViesServiceException;
 use PHPUnit\Framework\TestCase;
 
 class ValidatorTest extends TestCase
