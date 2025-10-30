@@ -1,5 +1,5 @@
 {
-	"name": "webatvantage/vies",
+	"name": "webatvantage/vies-vat-api-clien",
 	"type": "tool",
 	"description": "EU VAT numbers validation using the VIES Service of the European Commission",
 	"keywords": [
@@ -8,7 +8,7 @@
 		"EU",
 		"EC"
 	],
-	"homepage": "https://github.com/webatvantage/vat-number-validator",
+	"homepage": "https://github.com/webatvantage/vies-vat-api-client",
 	"minimum-stability": "stable",
 	"license": "MIT",
 	"authors": [
