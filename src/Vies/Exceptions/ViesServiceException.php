@@ -8,11 +8,11 @@ declare (strict_types=1);
  * Component using the European Commission (EC) VAT Information Exchange System (VIES) to verify and validate VAT
  * registration numbers in the EU, using PHP and Composer.
  *
- * @author  Michelangelo van Dam <dragonbe+github@gmail.com>
  * @license  MIT
  *
  */
-namespace DragonBe\Vies\Exceptions;
+
+namespace Webatvantage\Vies\Exceptions;
 
 /**
  * ViesServiceException
@@ -22,9 +22,5 @@ namespace DragonBe\Vies\Exceptions;
  * registered within the European Union
  *
  * @see \Exception
- * @package \DragonBe\Vies
  */
-class ViesServiceException extends \Exception
-{
-
-}
+class ViesServiceException extends \Exception {}

@@ -2,25 +2,26 @@
 
 declare (strict_types=1);
 
-namespace DragonBe\Test\Vies\Validator;
+namespace Webatvantage\Vies\Tests\Validator;
 
 class ValidatorELTest extends AbstractValidatorTest
 {
-    /**
-     * @covers \DragonBe\Vies\Validators\ValidatorEL
-     * @dataProvider vatNumberProvider
-     */
-    public function testValidator(string $vatNumber, bool $state)
-    {
-        $this->validateVatNumber('EL', $vatNumber, $state);
-    }
+	/**
+	 * @covers \Webatvantage\Vies\Validators\ValidatorEL
+	 *
+	 * @dataProvider vatNumberProvider
+	 */
+	public function testValidator(string $vatNumber, bool $state)
+	{
+		$this->validateVatNumber('EL', $vatNumber, $state);
+	}
 
-    public function vatNumberProvider()
-    {
-        return [
-            ['040127797', true],
-            ['040127796', false],
-            ['1234567', false],
-        ];
-    }
+	public function vatNumberProvider(): array
+	{
+		return [
+			['040127797', true],
+			['040127796', false],
+			['1234567', false],
+		];
+	}
 }

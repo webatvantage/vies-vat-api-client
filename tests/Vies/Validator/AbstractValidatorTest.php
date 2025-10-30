@@ -2,15 +2,18 @@
 
 declare (strict_types=1);
 
-namespace DragonBe\Test\Vies\Validator;
+namespace Webatvantage\Vies\Tests\Validator;
 
-use DragonBe\Vies\Vies;
 use PHPUnit\Framework\TestCase;
+use Webatvantage\Vies\Api\VatEuropeApi;
+use Webatvantage\Vies\Vies;
 
 abstract class AbstractValidatorTest extends TestCase
 {
-    protected function validateVatNumber(string $country, string $vatNumber, bool $state)
-    {
-        $this->assertSame($state, (new Vies())->validateVatSum($country, $vatNumber));
-    }
+	protected function validateVatNumber(string $country, string $vatNumber, bool $state)
+	{
+		$vies = new Vies(new VatEuropeApi());
+
+		$this->assertSame($state, $vies->validateVatSum($country, $vatNumber));
+	}
 }

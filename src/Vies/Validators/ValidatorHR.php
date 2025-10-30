@@ -1,46 +1,40 @@
 <?php
 
-declare (strict_types=1);
 
-/**
- * \DragonBe\Vies
- *
- * @author  Paweł Krzaczkowski <krzaczek+github@gmail.com>
- * @license  MIT
- */
+namespace Webatvantage\Vies\Validators;
 
-namespace DragonBe\Vies\Validators;
-
-use DragonBe\Vies\VatValidator;
+use Webatvantage\Vies\VatValidator;
 
 /**
  * Class ValidatorHR
  *
- * @package DragonBe\Vies\Validator
  */
 class ValidatorHR extends VatValidator
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function validate(string $vatNumber): bool
-    {
-        if (strlen($vatNumber) != 11) {
-            return false;
-        }
+	/**
+	 * {@inheritdoc}
+	 */
+	public function validate(string $vatNumber): bool
+	{
+		if (strlen($vatNumber) != 11)
+		{
+			return false;
+		}
 
-        if (! ctype_digit($vatNumber)) {
-            return false;
-        }
+		if (!ctype_digit($vatNumber))
+		{
+			return false;
+		}
 
-        $product = 10;
+		$product = 10;
 
-        for ($i = 0; $i < 10; $i++) {
-            $sum = ($vatNumber[$i] + $product) % 10;
-            $sum = ($sum == 0) ? 10 : $sum;
-            $product = (2 * $sum) % 11;
-        }
+		for ($i = 0; $i < 10; $i++)
+		{
+			$sum = ($vatNumber[$i] + $product) % 10;
+			$sum = ($sum == 0) ? 10 : $sum;
+			$product = (2 * $sum) % 11;
+		}
 
-        return ($product + (int) $vatNumber[10]) % 10 == 1;
-    }
+		return ($product + (int) $vatNumber[10]) % 10 == 1;
+	}
 }
