@@ -1,5 +1,5 @@
 {
-	"name": "webatvantage/vies-vat-api-clien",
+	"name": "webatvantage/vies-vat-api-client",
 	"type": "tool",
 	"description": "EU VAT numbers validation using the VIES Service of the European Commission",
 	"keywords": [
