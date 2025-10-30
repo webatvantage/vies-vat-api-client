@@ -5,7 +5,6 @@ namespace Webatvantage\Vies\Api;
 use GuzzleHttp\Client;
 use Psr\Http\Client\ClientExceptionInterface;
 use Psr\Http\Client\ClientInterface;
-use Webatvantage\Vies\Api\VatResponse;
 use Webatvantage\Vies\Exceptions\ViesServiceException;
 
 class VatEuropeApi
