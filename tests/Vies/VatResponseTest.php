@@ -23,8 +23,6 @@ class VatResponseTest extends TestCase
 	{
 		$response = $this->createViesResponse($validCheck);
 
-
-
 		$checkVatResponse = new VatResponse($response);
 		$this->assertSame($response->countryCode, $checkVatResponse->getCountryCode());
 		$this->assertSame($response->vatNumber, $checkVatResponse->getVatNumber());
@@ -205,7 +203,7 @@ class VatResponseTest extends TestCase
 		$countryCode,
 		$vatNumber,
 		$requestDate,
-		$valid
+		$valid,
 	) {
 
 		$expectedResult = [
@@ -267,7 +265,7 @@ class VatResponseTest extends TestCase
 		$countryCode,
 		$vatNumber,
 		$requestDate,
-		$valid
+		$valid,
 	) {
 
 		$expectedResult = [
@@ -380,7 +378,7 @@ class VatResponseTest extends TestCase
 		string $companyType,
 		string $companyStreet,
 		string $companyPostcode,
-		string $companyCity
+		string $companyCity,
 	) {
 		$requestDate = date('Y-m-dP');
 		$valid = true;

@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Webatvantage\Vies\Validators;
 
 use Webatvantage\Vies\VatValidator;

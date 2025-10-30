@@ -5,10 +5,10 @@ declare (strict_types=1);
 namespace Webatvantage\Vies\Tests;
 
 use PHPUnit\Framework\TestCase;
+use Webatvantage\Vies\Api\VatResponse;
 use Webatvantage\Vies\Exceptions\ViesException;
 use Webatvantage\Vies\Exceptions\ViesServiceException;
 use Webatvantage\Vies\HeartBeat;
-use Webatvantage\Vies\Api\VatResponse;
 use Webatvantage\Vies\Vies;
 
 /**
@@ -382,7 +382,7 @@ class ViesTest extends TestCase
 	 */
 	public function testValidateVatSumToThrowException(
 		string $countryCode,
-		string $vatId
+		string $vatId,
 	) {
 		$vies = new Vies();
 		$this->expectException(ViesException::class);
@@ -491,7 +491,7 @@ class ViesTest extends TestCase
 		string $traderCompanyType,
 		string $traderStreet,
 		string $traderPostcode,
-		string $traderCity
+		string $traderCity,
 	) {
 		$viesRef = new \ReflectionClass(Vies::class);
 		$addOptionalArguments = $viesRef->getMethod('addOptionalArguments');
@@ -546,7 +546,7 @@ class ViesTest extends TestCase
 		string $traderCompanyType,
 		string $traderStreet,
 		string $traderPostcode,
-		string $traderCity
+		string $traderCity,
 	) {
 		$viesRef = new \ReflectionClass(Vies::class);
 		$addOptionalArguments = $viesRef->getMethod('addOptionalArguments');
