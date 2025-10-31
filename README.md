@@ -156,9 +156,9 @@ $vatNumber = 'BE0203430576';
 
 ```php
 
-use Webatvantage\Vies\Vies;
+use Webatvantage\Vies\Countries;
 
-$countries = Vies::listEuropeanCountries();
+$countries = Countries::europeanCountries();
 
 ```
 

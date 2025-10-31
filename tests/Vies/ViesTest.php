@@ -349,14 +349,6 @@ class ViesTest extends TestCase
 	}
 
 	/**
-	 * @covers ::listEuropeanCountries
-	 */
-	public function testRetrievingListOfEuropeanCountriesStatically()
-	{
-		$this->assertCount(Vies::VIES_EU_COUNTRY_TOTAL, Vies::listEuropeanCountries());
-	}
-
-	/**
 	 * Data provider that will generate bad VAT ID's
 	 *
 	 * @return array
@@ -382,7 +374,7 @@ class ViesTest extends TestCase
 	 */
 	public function testValidateVatSumToThrowException(
 		string $countryCode,
-		string $vatId,
+		string $vatId
 	) {
 		$vies = new Vies();
 		$this->expectException(ViesException::class);
@@ -491,7 +483,7 @@ class ViesTest extends TestCase
 		string $traderCompanyType,
 		string $traderStreet,
 		string $traderPostcode,
-		string $traderCity,
+		string $traderCity
 	) {
 		$viesRef = new \ReflectionClass(Vies::class);
 		$addOptionalArguments = $viesRef->getMethod('addOptionalArguments');
@@ -546,7 +538,7 @@ class ViesTest extends TestCase
 		string $traderCompanyType,
 		string $traderStreet,
 		string $traderPostcode,
-		string $traderCity,
+		string $traderCity
 	) {
 		$viesRef = new \ReflectionClass(Vies::class);
 		$addOptionalArguments = $viesRef->getMethod('addOptionalArguments');

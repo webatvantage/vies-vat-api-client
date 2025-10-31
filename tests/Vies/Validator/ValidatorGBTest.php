@@ -4,16 +4,20 @@ declare (strict_types=1);
 
 namespace Webatvantage\Vies\Tests\Validator;
 
+use Webatvantage\Vies\Exceptions\ViesException;
+
 class ValidatorGBTest extends AbstractValidatorTest
 {
 	/**
 	 * @covers \Webatvantage\Vies\Validators\ValidatorGB
 	 *
 	 * @dataProvider vatNumberProvider
+	 *
+	 * @throws ViesException
 	 */
 	public function testValidator(string $vatNumber, bool $state)
 	{
-		$this->validateVatNumber('GB', $vatNumber, $state);
+		$this->validateVatNumber('GB', $vatNumber, $state, true);
 	}
 
 	public function vatNumberProvider(): array

@@ -5,6 +5,8 @@ declare (strict_types=1);
 namespace Webatvantage\Vies\Tests;
 
 use PHPUnit\Framework\TestCase;
+use Webatvantage\Vies\Api\VatEuropeApi;
+use Webatvantage\Vies\Exceptions\ViesException;
 use Webatvantage\Vies\Exceptions\ViesServiceException;
 use Webatvantage\Vies\Vies;
 
@@ -58,9 +60,12 @@ class ValidatorTest extends TestCase
 		];
 	}
 
+	/**
+	 * @throws ViesException
+	 */
 	public function testVatNumberChecksumSuccess()
 	{
-		$vies = new Vies();
+		$vies = new Vies(new VatEuropeApi());
 
 		foreach ($this->vatNumberProvider() as $country => $numbers)
 		{
@@ -70,7 +75,7 @@ class ValidatorTest extends TestCase
 			}
 			foreach ($numbers[0] as $number)
 			{
-				$result = $vies->validateVatSum($country, $number);
+				$result = $vies->validateVatSum($country, $number, true);
 				$this->assertTrue(
 					$result,
 					'VAT ID ' . $country . $number . ' should validate, but is not valid',
@@ -79,15 +84,18 @@ class ValidatorTest extends TestCase
 		}
 	}
 
+	/**
+	 * @throws ViesException
+	 */
 	public function testVatNumberChecksumFailure()
 	{
-		$vies = new Vies();
+		$vies = new Vies(new VatEuropeApi());
 
 		foreach ($this->vatNumberProvider() as $country => $numbers)
 		{
 			foreach ($numbers[1] as $number)
 			{
-				$result = $vies->validateVatSum($country, $number);
+				$result = $vies->validateVatSum($country, $number, true);
 				$this->assertFalse($result);
 			}
 		}
@@ -216,22 +224,15 @@ class ValidatorTest extends TestCase
 	 */
 	public function testArgumentValidationSucceedsForNonLatinArgumentValues(array $traderData)
 	{
-		$vies = new Vies();
+		$vies = new Vies(new VatEuropeApi());
 
 		try
 		{
 			$vatResponse = $vies->validateVat(
 				$traderData['countryCode'],
 				$traderData['vatNumber'],
-				$traderData['requesterCountryCode'],
-				$traderData['requesterVatNumber'],
-				$traderData['traderName'],
-				$traderData['traderCompanyType'],
-				$traderData['traderStreet'],
-				$traderData['traderPostcode'],
-				$traderData['traderCity'],
 			);
-			$this->assertTrue($vatResponse->isValid());
+			$this->assertTrue($vatResponse->valid);
 		}
 		catch (ViesServiceException $viesServiceException)
 		{

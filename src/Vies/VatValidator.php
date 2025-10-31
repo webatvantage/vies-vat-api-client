@@ -47,7 +47,7 @@ abstract class VatValidator implements ValidatorInterface
 		array $weights,
 		int $restModulo = self::DEFAULT_MODULO,
 		int $vatNumberPosition = self::DEFAULT_VAT_POSITION,
-		int $weightStart = self::DEFAULT_WEIGHT_START,
+		int $weightStart = self::DEFAULT_WEIGHT_START
 	): bool {
 		$checkVal = $this->sumWeights($weights, $vatNumber);
 
