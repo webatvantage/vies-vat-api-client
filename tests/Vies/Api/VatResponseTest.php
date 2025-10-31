@@ -4,8 +4,6 @@ declare (strict_types=1);
 
 namespace Webatvantage\Vies\Tests\Api;
 
-use DateTime;
-use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 use Webatvantage\Vies\Api\VatResponse;
 
