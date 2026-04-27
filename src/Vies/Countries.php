@@ -132,6 +132,11 @@ class Countries
 		return array_key_exists($countryCode, static::excludedCountries());
 	}
 
+	public static function isEU(string $countryCode): bool
+	{
+		return array_key_exists($countryCode, static::europeanCountries());
+	}
+
 	/**
 	 * @throws InvalidCountryCodeException
 	 */
