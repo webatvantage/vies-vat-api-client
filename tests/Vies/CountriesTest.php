@@ -1,6 +1,6 @@
 <?php
 
-namespace Vies;
+namespace Webatvantage\Vies\Tests;
 
 use PHPUnit\Framework\TestCase;
 use Webatvantage\Vies\Countries;

@@ -43,7 +43,7 @@
 	"require-dev": {
 		"phpstan/phpstan": "^2.2",
 		"phpunit/phpunit": "^9.0",
-		"webatvantage/php-cs-fixer-config": "^1.0"
+		"webatvantage/php-cs-fixer-config": "^1.2.0"
 	},
 	"scripts": {
 		"analyse": "vendor/bin/phpstan analyse",
