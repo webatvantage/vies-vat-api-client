@@ -8,13 +8,14 @@ The `Vies` class provides functionality to make a API call to VIES and returns a
 - VAT registration number (string): contains the complete registration number without the country code
 - Date of request (DateTime): the date when the request was made
 - Valid (boolean): flag indicating the registration number was valid (TRUE) or not (FALSE)
-- Name (string): registered company name (if provided by EC member state)
-- Address (string): registered company address (if provided by EC member state)
+- Name (string|null): registered company name (`null` when not provided by the EC member state)
+- Address (string|null): registered company address (`null` when not provided by the EC member state)
+- Request identifier (string|null): the validation identifier returned by VIES (`null` when not provided), which you may store as proof of consultation
 
 Stated on the European Commission website:
 > To make an intra-Community supply without charging VAT, you **should ensure** that the person to whom you are supplying the goods is a taxable person in another Member State, and that the goods in question have left, or will leave your Member State to another MS. VAT-number should also be in the invoice.
 
-More information at http://ec.europa.eu/taxation_customs/vies/faqvies.do#item16
+More information at https://ec.europa.eu/taxation_customs/vies/#/technical-information
 
 ## GDPR and privacy regulation of VAT within the EU
 
@@ -32,15 +33,15 @@ When you have implemented this service package in your own project, be sure that
 - Guzzle: ^7.9
 - Extension: json
 
-Please read the [release notes](https://github.com/webatvantage/vies/releases) for details.
+Please read the [release notes](https://github.com/webatvantage/vies-vat-api-client/releases) for details.
 
 ## Installation
 
-This project is on [Packagist](https://packagist.org/packages/dragonbe/vies)!
+This project is on [Packagist](https://packagist.org/packages/webatvantage/vies-vat-api-client)!
 
-To install the latest stable version use `composer require webatvantage/vies`.
+To install the latest stable version use `composer require webatvantage/vies-vat-api-client`.
 
-To install specifically a version (e.g. 1.0.0), just add it to the command above, for example `composer require webatvantage/vies:1.0.0`
+To install specifically a version (e.g. 1.0.0), just add it to the command above, for example `composer require webatvantage/vies-vat-api-client:1.0.0`
 
 ## Usage
 
@@ -80,14 +81,14 @@ $vatResult->valid ? 'Valid' : 'Not valid'
 ```php
 try
 {
-    $valid = $vat = $viesService->validateFormat(
+    $valid = $viesService->validateVatFormat(
         'BE', // Country code
         '0203430576' // VAT ID
     );
 }
 catch (ViesException $exception)
 {
-    $reason = $exception->getMessage()
+    $reason = $exception->getMessage();
 }
 ```
 
@@ -106,8 +107,16 @@ function validateVat(string $countryCode, string $vatNumber, ?string &$error = n
 
         return false;
     }
-    catch (InvalidVatNumberFormatException)
+    catch (InvalidVatNumberFormatException $exception)
     {
+        $error = $exception->getMessage();
+
+        return false;
+    }
+    catch (ViesServiceException $exception)
+    {
+        // Thrown when VIES is unreachable, or when the country is no longer
+        // served by VIES (e.g. the United Kingdom since Brexit).
         $error = $exception->getMessage();
 
         return false;

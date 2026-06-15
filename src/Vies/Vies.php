@@ -22,9 +22,9 @@ use Webatvantage\Vies\Exceptions\ViesServiceException;
 /**
  * Class Vies
  *
- * This class provides a soap client for usage of the VIES web service
- * provided by the European Commission to validate VAT numbers of companies
- * registered within the European Union
+ * This class provides a client for the REST web service provided by the
+ * European Commission to validate VAT numbers of companies registered
+ * within the European Union.
  */
 class Vies
 {
@@ -46,14 +46,14 @@ class Vies
 	 */
 	public function validateVat(string $countryCode, string $vatNumber): VatResponse
 	{
-		$this->validateVatFormat($countryCode, $vatNumber);
-
 		if (Countries::isExcluded($countryCode))
 		{
 			$country = Countries::excludedCountry($countryCode);
 
 			throw new CountryNoLongerSupportedException($country->getName(), $country->getExcluded()->format('Y-m-d'), $country->getReason());
 		}
+
+		$this->validateVatFormat($countryCode, $vatNumber);
 
 		return $this->api->retrieveVatInstance($countryCode, $vatNumber);
 	}
@@ -137,8 +137,8 @@ class Vies
 	 */
 	public static function normalizeVat(string $vatNumber): string
 	{
-		$vatNumber = mb_trim($vatNumber);
-		$vatNumber = mb_strtoupper($vatNumber);
+		$vatNumber = trim($vatNumber);
+		$vatNumber = strtoupper($vatNumber);
 
 		return str_replace([' ', '.', '-'], '', $vatNumber);
 	}

@@ -60,6 +60,8 @@ class VatEuropeApi
 
 		$data = json_decode($contents, false, 512, JSON_THROW_ON_ERROR);
 
+		// For invalid VAT numbers VIES may omit the name/address fields entirely;
+		// VatResponse normalizes empty/'---' values to null.
 		return new VatResponse(
 			$data->countryCode,
 			$data->vatNumber,
@@ -67,6 +69,7 @@ class VatEuropeApi
 			$data->address,
 			new \DateTime($data->requestDate),
 			$data->valid,
+			$data->requestIdentifier ?? null,
 		);
 	}
 }

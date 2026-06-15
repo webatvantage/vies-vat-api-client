@@ -60,19 +60,10 @@ class ValidatorIE extends VatValidator
 			$checkVal += (9 * strpos($this->alphabet, $vatNumber[8]));
 		}
 
-		$checkVal = ($checkVal % 23);
+		$checkVal = $checkVal % 23;
 
-		if ($checkVal == 0)
-		{
-			return $checksum == 'W';
-		}
-
-		$checkChar = 'A';
-		for ($i = $checkVal - 1; $i > 0; $i--)
-		{
-			$checkChar++;
-		}
-
-		return $checkChar == $checksum;
+		// $this->alphabet is ordered so that its index equals the expected check
+		// character for a given checksum value (0 => 'W', 1 => 'A', 2 => 'B', ...).
+		return $checksum === $this->alphabet[$checkVal];
 	}
 }
