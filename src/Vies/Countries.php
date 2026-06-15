@@ -81,32 +81,27 @@ class Countries
 	/**
 	 * A list of European Union countries as of January 2015
 	 *
-	 * @return array<string,Country>
+	 * @return array<string,Country> map of countries
 	 */
 	public static function europeanCountries(): array
 	{
-		static $list;
+		static $countries;
 
-		if ($list)
+		if ($countries)
 		{
-			return $list;
+			return $countries;
 		}
 
 		$countries = static::countries();
 
-		$list = array_combine(
-			array_keys($countries),
-			array_map(fn (Country $country) => $country->getName(), $countries),
-		);
-
-		unset($list['EU']); // Remove MOSS Number
+		unset($countries['EU']); // Remove MOSS Number
 
 		foreach (array_keys(static::excludedCountries()) as $excludedCountryCode)
 		{
-			unset($list[$excludedCountryCode]);
+			unset($countries[$excludedCountryCode]);
 		}
 
-		return $list;
+		return $countries;
 	}
 
 	/**
