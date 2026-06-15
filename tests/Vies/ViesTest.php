@@ -208,6 +208,59 @@ class ViesTest extends TestCase
 		$vies->validateVat('BE', '0417710407');
 	}
 
+	public function viesErrorResponseProvider(): array
+	{
+		return [
+			'member-state rate limiting' => [
+				[['error' => ViesServiceException::MS_MAX_CONCURRENT_REQ]],
+				[ViesServiceException::MS_MAX_CONCURRENT_REQ],
+			],
+			'multiple error codes' => [
+				[['error' => ViesServiceException::MS_UNAVAILABLE], ['error' => ViesServiceException::TIMEOUT]],
+				[ViesServiceException::MS_UNAVAILABLE, ViesServiceException::TIMEOUT],
+			],
+		];
+	}
+
+	/**
+	 * VIES signals application-level problems (member-state rate limiting,
+	 * downtime, ...) with a 200 OK whose body has actionSucceed=false and a list
+	 * of error codes — and no VAT fields. This must surface as a service
+	 * exception that exposes the raw codes, rather than blowing up on the missing
+	 * data.
+	 *
+	 * @covers ::validateVat
+	 *
+	 * @dataProvider viesErrorResponseProvider
+	 *
+	 * @param array<array<string,string>> $errorWrappers
+	 * @param string[]                    $expectedCodes
+	 */
+	public function testValidateVatWrapsErrorResponseInServiceException(array $errorWrappers, array $expectedCodes)
+	{
+		$vies = $this->viesWithResponses([
+			$this->jsonResponse([
+				'actionSucceed' => false,
+				'errorWrappers' => $errorWrappers,
+			]),
+		]);
+
+		try
+		{
+			$vies->validateVat('BE', '0417710407');
+			$this->fail('Expected a ViesServiceException to be thrown.');
+		}
+		catch (ViesServiceException $exception)
+		{
+			$this->assertSame($expectedCodes, $exception->getErrorCodes());
+
+			foreach ($expectedCodes as $code)
+			{
+				$this->assertStringContainsString($code, $exception->getMessage());
+			}
+		}
+	}
+
 	/**
 	 * Build a Vies instance backed by a mocked HTTP client that returns the
 	 * queued responses/exceptions in order.
