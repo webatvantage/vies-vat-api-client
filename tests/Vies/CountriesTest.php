@@ -11,13 +11,16 @@ use Webatvantage\Vies\Countries;
 class CountriesTest extends TestCase
 {
 	/**
-	 * @covers ::
+	 * @covers \Webatvantage\Vies\Countries::europeanCountries
 	 */
 	public function testRetrievingListOfEuropeanCountriesStatically(): void
 	{
 		$this->assertCount(Countries::VIES_EU_COUNTRY_TOTAL, Countries::europeanCountries());
 	}
 
+	/**
+	 * @covers \Webatvantage\Vies\Countries::isEU
+	 */
 	public function testItValidatesIsEuFunction(): void
 	{
 		$this->assertTrue(Countries::isEu('DE'));
