@@ -13,7 +13,7 @@ class ValidatorNL extends VatValidator
 	/**
 	 * Check Character: 10-A, 11-B .... 35-Z, 36-+, 37-*
 	 *
-	 * @var array
+	 * @var array<string, int>
 	 */
 	protected $checkCharacter = [
 		'A' => 10,

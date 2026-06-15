@@ -40,6 +40,9 @@ class VatResponse implements \JsonSerializable
 		return ($value === null || $value === '' || $value === '---') ? null : $value;
 	}
 
+	/**
+	 * @return array<string, string|bool|null>
+	 */
 	public function toArray(): array
 	{
 		return [
@@ -53,6 +56,9 @@ class VatResponse implements \JsonSerializable
 		];
 	}
 
+	/**
+	 * @return array<string, string|bool|null>
+	 */
 	public function jsonSerialize(): array
 	{
 		return $this->toArray();

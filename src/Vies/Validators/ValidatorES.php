@@ -13,28 +13,28 @@ class ValidatorES extends VatValidator
 	/**
 	 * Allowed C1 if C9 is Alphabetic
 	 *
-	 * @var array
+	 * @var array<string>
 	 */
 	protected $allowedC1Alphabetic = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'N', 'P', 'Q', 'R', 'S', 'W'];
 
 	/**
 	 * Allowed C1 if C9 is Numeric for National juridical
 	 *
-	 * @var array
+	 * @var array<string>
 	 */
 	protected $allowedC1Numeric = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'J', 'U', 'V'];
 
 	/**
 	 * Allowed C1 if C9 is Numeric for physical person
 	 *
-	 * @var array
+	 * @var array<string>
 	 */
 	protected $allowedC1Physical = ['K', 'L', 'M', 'X', 'Y', 'Z', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0'];
 
 	/**
 	 * Check Character: 1-A, 2-B, 3-C, 4-D, 5-E, 6-F, 7-G, 8-H, 9-I, 10-J
 	 *
-	 * @var array
+	 * @var array<int, string>
 	 */
 	protected $checkCharacter = [
 		1 => 'A',
@@ -53,7 +53,7 @@ class ValidatorES extends VatValidator
 	 * Check Character: 1-T, 2-R, 3-W, 4-A, 5-G, 6-M, 7-Y, 8-F, 9-P, 10-D, 11-X, 12-B, 13-N,
 	 *                  14-J, 15-Z, 16-S, 17-Q, 18-V, 19-H, 20-L, 21-C, 22-K, 23-E
 	 *
-	 * @var array
+	 * @var array<int, string>
 	 */
 	protected $checkCharacterPhysical = [
 		1 => 'T',
@@ -165,7 +165,7 @@ class ValidatorES extends VatValidator
 	 */
 	private function validatePhysical(string $vatNumber): string
 	{
-		$vatNumber[0] = str_replace(['Y', 'Z'], [1, 2], $vatNumber[0]);
+		$vatNumber[0] = str_replace(['Y', 'Z'], ['1', '2'], $vatNumber[0]);
 
 		if (ctype_digit($vatNumber[0]))
 		{

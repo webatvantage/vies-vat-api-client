@@ -3,8 +3,8 @@
 namespace Webatvantage\Vies\Api;
 
 use GuzzleHttp\Client;
+use GuzzleHttp\ClientInterface;
 use Psr\Http\Client\ClientExceptionInterface;
-use Psr\Http\Client\ClientInterface;
 use Webatvantage\Vies\Exceptions\ViesServiceException;
 
 class VatEuropeApi
@@ -13,7 +13,7 @@ class VatEuropeApi
 
 	private string $url;
 
-	private ?ClientInterface $client;
+	private ClientInterface $client;
 
 	public function __construct(string $url = self::API_URL, ?ClientInterface $client = null)
 	{
@@ -35,7 +35,7 @@ class VatEuropeApi
 	{
 		try
 		{
-			$response = $this->client->post($this->url, [
+			$response = $this->client->request('POST', $this->url, [
 				'json' => [
 					'countryCode' => $countryCode,
 					'vatNumber' => $vatNumber,

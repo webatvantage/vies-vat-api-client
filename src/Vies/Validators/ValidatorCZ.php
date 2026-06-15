@@ -17,9 +17,9 @@ use Webatvantage\Vies\VatValidator;
 class ValidatorCZ extends VatValidator
 {
 	/**
-	 * @var array
+	 * @var array<int>
 	 */
-	protected $allowedD = [8, 7, 6, 5, 4, 3, 2, 1, 0, 9, 8];
+	protected array $allowedD = [8, 7, 6, 5, 4, 3, 2, 1, 0, 9, 8];
 
 	/**
 	 * @param string $vatNumber

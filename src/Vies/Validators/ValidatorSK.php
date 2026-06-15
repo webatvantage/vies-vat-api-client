@@ -28,7 +28,7 @@ class ValidatorSK extends VatValidator
 		}
 		else
 		{
-			return $vatNumber % 11 == 0;
+			return (int) $vatNumber % 11 == 0;
 		}
 	}
 }

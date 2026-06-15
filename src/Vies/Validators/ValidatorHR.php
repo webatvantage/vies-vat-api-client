@@ -29,7 +29,7 @@ class ValidatorHR extends VatValidator
 
 		for ($i = 0; $i < 10; $i++)
 		{
-			$sum = ($vatNumber[$i] + $product) % 10;
+			$sum = ((int) $vatNumber[$i] + $product) % 10;
 			$sum = ($sum == 0) ? 10 : $sum;
 			$product = (2 * $sum) % 11;
 		}

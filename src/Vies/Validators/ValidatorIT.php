@@ -37,11 +37,12 @@ class ValidatorIT extends VatValidator
 		{
 			if (!$this->isEven($i))
 			{
-				$Sum1 += $vatNumber[$i - 1];
+				$Sum1 += (int) $vatNumber[$i - 1];
 			}
 			else
 			{
-				$Sum2 += (int)($vatNumber[$i - 1] / 5) + ((2 * $vatNumber[$i - 1]) % 10);
+				$digit = (int) $vatNumber[$i - 1];
+				$Sum2 += (int)($digit / 5) + ((2 * $digit) % 10);
 			}
 		}
 

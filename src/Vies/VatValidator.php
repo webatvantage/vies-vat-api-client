@@ -27,6 +27,9 @@ abstract class VatValidator implements ValidatorInterface
 		return $val % 2 === 0;
 	}
 
+	/**
+	 * @param array<int> $weights
+	 */
 	protected function sumWeights(array $weights, string $vatNumber, int $start = self::DEFAULT_WEIGHT_START): int
 	{
 		$checkVal = 0;
@@ -41,6 +44,8 @@ abstract class VatValidator implements ValidatorInterface
 
 	/**
 	 * A method to calculate the value to check the checksum of a VAT number
+	 *
+	 * @param array<int> $weights
 	 */
 	protected function checkValue(
 		string $vatNumber,

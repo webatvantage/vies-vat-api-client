@@ -10,7 +10,7 @@ use Webatvantage\Vies\VatValidator;
  */
 class ValidatorIE extends VatValidator
 {
-	protected $alphabet = 'WABCDEFGHIJKLMNOPQRSTUV';
+	protected string $alphabet = 'WABCDEFGHIJKLMNOPQRSTUV';
 
 	/**
 	 * {@inheritdoc}
