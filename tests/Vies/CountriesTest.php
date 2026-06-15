@@ -13,12 +13,12 @@ class CountriesTest extends TestCase
 	/**
 	 * @covers ::
 	 */
-	public function testRetrievingListOfEuropeanCountriesStatically()
+	public function testRetrievingListOfEuropeanCountriesStatically(): void
 	{
 		$this->assertCount(Countries::VIES_EU_COUNTRY_TOTAL, Countries::europeanCountries());
 	}
 
-	public function testItValidatesIsEuFunction()
+	public function testItValidatesIsEuFunction(): void
 	{
 		$this->assertTrue(Countries::isEu('DE'));
 		$this->assertFalse(Countries::isEu('US'));

@@ -11,11 +11,14 @@ class ValidatorATTest extends AbstractValidatorTest
 	 *
 	 * @dataProvider vatNumberProvider
 	 */
-	public function test_validator(string $vatNumber, bool $state)
+	public function test_validator(string $vatNumber, bool $state): void
 	{
 		$this->validateVatNumber('AT', $vatNumber, $state);
 	}
 
+	/**
+	 * @return array<int, array{0: string, 1: bool}>
+	 */
 	public function vatNumberProvider(): array
 	{
 		return [

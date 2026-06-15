@@ -12,6 +12,9 @@ use Webatvantage\Vies\Api\VatResponse;
  */
 class VatResponseTest extends TestCase
 {
+	/**
+	 * @return array<int, array{0: bool}>
+	 */
 	public function validationProvider(): array
 	{
 		return  [
@@ -25,7 +28,7 @@ class VatResponseTest extends TestCase
 	 *
 	 * @dataProvider validationProvider
 	 */
-	public function testCanCreateResponseAtConstruct($validCheck)
+	public function testCanCreateResponseAtConstruct(bool $validCheck): void
 	{
 		$data = [
 			'countryCode' => 'BE',
@@ -47,7 +50,7 @@ class VatResponseTest extends TestCase
 	/**
 	 * @dataProvider validationProvider
 	 */
-	public function testCanCreateResponseWithoutNameAndAddressAtConstruct($validCheck)
+	public function testCanCreateResponseWithoutNameAndAddressAtConstruct(bool $validCheck): void
 	{
 		$data = [
 			'countryCode' => 'BE',

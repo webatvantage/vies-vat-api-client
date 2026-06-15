@@ -11,6 +11,9 @@ use Webatvantage\Vies\Vies;
 
 class ValidatorTest extends TestCase
 {
+	/**
+	 * @return array<string, array{0: string|array<int, string>, 1: array<int, string>}>
+	 */
 	public function vatNumberProvider(): array
 	{
 		return [
@@ -62,7 +65,7 @@ class ValidatorTest extends TestCase
 	/**
 	 * @throws ViesException
 	 */
-	public function testVatNumberChecksumSuccess()
+	public function testVatNumberChecksumSuccess(): void
 	{
 		$vies = new Vies(new VatEuropeApi());
 
@@ -86,7 +89,7 @@ class ValidatorTest extends TestCase
 	/**
 	 * @throws ViesException
 	 */
-	public function testVatNumberChecksumFailure()
+	public function testVatNumberChecksumFailure(): void
 	{
 		$vies = new Vies(new VatEuropeApi());
 

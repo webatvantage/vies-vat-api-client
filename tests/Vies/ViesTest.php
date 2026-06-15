@@ -24,6 +24,9 @@ use Webatvantage\Vies\Vies;
  */
 class ViesTest extends TestCase
 {
+	/**
+	 * @return array<int, array{0: string, 1: string}>
+	 */
 	public function vatNumberProvider(): array
 	{
 		return [
@@ -41,7 +44,7 @@ class ViesTest extends TestCase
 	 *
 	 * @dataProvider vatNumberProvider
 	 */
-	public function testVatNumberIsNormalized(string $vatNumber, string $normalized)
+	public function testVatNumberIsNormalized(string $vatNumber, string $normalized): void
 	{
 		$this->assertSame($normalized, Vies::normalizeVat($vatNumber));
 	}
@@ -49,7 +52,7 @@ class ViesTest extends TestCase
 	/**
 	 * @covers ::splitVatId
 	 */
-	public function testSplitVatId()
+	public function testSplitVatId(): void
 	{
 		['country' => $country, 'id' => $id] = Vies::splitVatId('BE0123456749');
 
@@ -60,7 +63,7 @@ class ViesTest extends TestCase
 	/**
 	 * @covers ::validateVat
 	 */
-	public function testValidateVatReturnsValidResponse()
+	public function testValidateVatReturnsValidResponse(): void
 	{
 		$vies = $this->viesWithResponses([
 			$this->jsonResponse([
@@ -89,7 +92,7 @@ class ViesTest extends TestCase
 	/**
 	 * @covers ::validateVat
 	 */
-	public function testValidateVatReturnsInvalidResponseWithoutTraderData()
+	public function testValidateVatReturnsInvalidResponseWithoutTraderData(): void
 	{
 		$vies = $this->viesWithResponses([
 			$this->jsonResponse([
@@ -117,7 +120,7 @@ class ViesTest extends TestCase
 	 *
 	 * @covers ::validateVat
 	 */
-	public function testValidateVatPreservesNonLatinTraderData()
+	public function testValidateVatPreservesNonLatinTraderData(): void
 	{
 		$vies = $this->viesWithResponses([
 			$this->jsonResponse([
@@ -141,7 +144,7 @@ class ViesTest extends TestCase
 	/**
 	 * @covers ::validateVat
 	 */
-	public function testValidateVatThrowsForUnknownCountryCode()
+	public function testValidateVatThrowsForUnknownCountryCode(): void
 	{
 		$vies = $this->viesWithResponses([]);
 
@@ -153,7 +156,7 @@ class ViesTest extends TestCase
 	/**
 	 * @covers ::validateVat
 	 */
-	public function testValidateVatThrowsForInvalidFormat()
+	public function testValidateVatThrowsForInvalidFormat(): void
 	{
 		$vies = $this->viesWithResponses([]);
 
@@ -168,7 +171,7 @@ class ViesTest extends TestCase
 	 *
 	 * @covers ::validateVat
 	 */
-	public function testValidateVatThrowsForExcludedCountry()
+	public function testValidateVatThrowsForExcludedCountry(): void
 	{
 		$vies = $this->viesWithResponses([]);
 
@@ -183,7 +186,7 @@ class ViesTest extends TestCase
 	/**
 	 * @covers ::validateVat
 	 */
-	public function testValidateVatWrapsTransportErrorsInServiceException()
+	public function testValidateVatWrapsTransportErrorsInServiceException(): void
 	{
 		$vies = $this->viesWithResponses([
 			new ConnectException('Could not resolve host', new Request('POST', VatEuropeApi::API_URL)),
@@ -197,7 +200,7 @@ class ViesTest extends TestCase
 	/**
 	 * @covers ::validateVat
 	 */
-	public function testValidateVatWrapsHttpErrorsInServiceException()
+	public function testValidateVatWrapsHttpErrorsInServiceException(): void
 	{
 		$vies = $this->viesWithResponses([
 			$this->jsonResponse(['actionSucceed' => false, 'errorWrappers' => []], 500),
@@ -208,6 +211,9 @@ class ViesTest extends TestCase
 		$vies->validateVat('BE', '0417710407');
 	}
 
+	/**
+	 * @return array<string, array{0: array<int, array<string, string>>, 1: array<int, string>}>
+	 */
 	public function viesErrorResponseProvider(): array
 	{
 		return [
@@ -236,7 +242,7 @@ class ViesTest extends TestCase
 	 * @param array<array<string,string>> $errorWrappers
 	 * @param string[]                    $expectedCodes
 	 */
-	public function testValidateVatWrapsErrorResponseInServiceException(array $errorWrappers, array $expectedCodes)
+	public function testValidateVatWrapsErrorResponseInServiceException(array $errorWrappers, array $expectedCodes): void
 	{
 		$vies = $this->viesWithResponses([
 			$this->jsonResponse([

@@ -15,11 +15,14 @@ class ValidatorGBTest extends AbstractValidatorTest
 	 *
 	 * @throws ViesException
 	 */
-	public function testValidator(string $vatNumber, bool $state)
+	public function testValidator(string $vatNumber, bool $state): void
 	{
 		$this->validateVatNumber('GB', $vatNumber, $state, true);
 	}
 
+	/**
+	 * @return array<int, array{0: string, 1: bool}>
+	 */
 	public function vatNumberProvider(): array
 	{
 		return [

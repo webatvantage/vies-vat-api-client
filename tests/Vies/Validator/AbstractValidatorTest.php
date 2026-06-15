@@ -14,7 +14,7 @@ abstract class AbstractValidatorTest extends TestCase
 	/**
 	 * @throws ViesException
 	 */
-	protected function validateVatNumber(string $country, string $vatNumber, bool $state, bool $useExcludedCountries = false)
+	protected function validateVatNumber(string $country, string $vatNumber, bool $state, bool $useExcludedCountries = false): void
 	{
 		$vies = new Vies(new VatEuropeApi());
 
