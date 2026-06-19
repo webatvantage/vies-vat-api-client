@@ -65,11 +65,23 @@ git remote get-url origin    # to build commit & compare URLs
 
 Capture each commit as a `(sha, subject)` pair — the full SHA is needed for the links.
 
-Drop these lines:
+Release notes are for the people who **consume the published library**, not for repo
+maintainers. Drop any commit that doesn't change what a consumer gets:
 
 - Exact match `Fix styling` — the CI auto-format commit from `.github/workflows/php-cs-fixer.yml`'s `stefanzweifel/git-auto-commit-action` step.
+- **Not relevant to end users** — repository housekeeping and dev-environment changes
+  that have no effect on anyone installing/using the package. Examples: `.gitignore` /
+  `.gitattributes` / `.editorconfig` tweaks, `.DS_Store` cleanup, IDE/editor config,
+  changes confined to `.claude/`, and other repo-meta-only commits. Judge by **who the
+  change affects**, not the file type alone — a CI/workflow change is droppable here,
+  but in a repo whose product *is* tooling/config (e.g. `php-cs-fixer-config`) that same
+  change is exactly what users care about, so keep it.
 - Empty lines.
 - Anything the user later asks you to drop during "Edit notes".
+
+When a commit is genuinely ambiguous, **keep it** rather than silently dropping it — the
+user can drop it during "Edit notes". Never silently discard a user-facing change.
+Track what you excluded as not-user-facing so you can list it in the preview (step 6).
 
 Derive the repo's `https://github.com/<owner>/<repo>` URL by stripping `.git` from the origin URL (and normalising `git@github.com:owner/repo` SSH form to HTTPS).
 
@@ -100,6 +112,12 @@ Since:  <since-ref>
 ```
 
 Skip the `## Updates` or `## Fixes` header entirely if its list is empty. If both sections are empty, stop and tell the user there's nothing to release since `<since-ref>`. The Full Changelog footer is always included as long as there is at least one section.
+
+If you excluded any commits as not-user-facing (per step 4), list them **below** the
+preview block as a short, plain-text note — e.g. `Excluded as not user-facing: Add
+.DS_Store to .gitignore`. This is not part of the release body; it just lets the user
+pull a commit back in via "Edit notes" if you judged wrong. Don't list the `Fix styling`
+auto-format commit here — that exclusion is unconditional and uninteresting.
 
 ### 7. Confirm
 
