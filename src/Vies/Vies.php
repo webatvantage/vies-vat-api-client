@@ -61,7 +61,6 @@ class Vies
 	/**
 	 * Validate the format of the VAT number and throw exceptions on failures
 	 *
-	 * @throws ViesException
 	 * @throws InvalidCountryCodeException
 	 * @throws InvalidVatNumberFormatException
 	 */
@@ -91,7 +90,7 @@ class Vies
 	 * @param string $countryCode The two-character country code of a European member country
 	 * @param string $vatNumber The VAT number (without the country identification) of a registered company
 	 *
-	 * @throws ViesException
+	 * @throws InvalidCountryCodeException
 	 */
 	public function validateVatSum(string $countryCode, string $vatNumber, bool $useExcludedCountries = false): bool
 	{
